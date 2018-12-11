@@ -2,7 +2,7 @@
 
 import sys
 import os
-
+import traceback
 
 commands = {}
 
@@ -49,6 +49,10 @@ def main():
 
     if command in commands:
         o = commands[command]()
-        o.run(args)
+        try:
+            o.run(args)
+        except Exception as e:
+            print(e)
+            # todo log traceback.format_exc()
     else:
         print('Unknow command %r\n\n' % (command,))
